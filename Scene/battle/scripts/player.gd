@@ -284,7 +284,6 @@ func perform_action (value, action : Action) -> void:
 		if roll <= status_chance:
 			player_heal_status.active = true
 		
-		
 	elif action.action_type == "Defence":
 		pass
 	
@@ -391,7 +390,6 @@ func clear_status_icon (filename : String) -> void:
 func deal_status_dmg (value, effect : String) -> void :	
 	if effect == 'heal':
 		value = int(value)
-		print(value)
 		$"../player_effects/heal".play("show") # play player effect heal
 		modulate_player(100,100,100,1) # flash player white
 		await get_tree().create_timer(0.3).timeout # wait 0.3 sec

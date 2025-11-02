@@ -197,7 +197,6 @@ func enemy_attack (enemy_name, move_name, damage, anim_name) -> void:
 	## Some status checks will be added here
 	await enemy_status_check(enemy_name)
 	if status_active == true:
-		print("yes")
 		return
 	
 	
@@ -258,13 +257,14 @@ func enemy_status_check (enemy_name) -> void:
 		announcer_text(text)
 		await get_tree().create_timer(3).timeout
 		if player_take_turn == false:
+			enemy_take_turn = true
 			await get_tree().create_timer(1.5).timeout
 			text = "[center]You took the advantage and prepared to attack[/center]"
 			announcer_text(text)
 			await get_tree().create_timer(1.5).timeout
 			player_attack()
-		else:
-			enemy_process() # to contunie with enemy battle logic
+		#else:
+			#enemy_process() # to contunie with enemy battle logic
 		status_active = true
 	
 	if enemy.frozen == true:
@@ -273,16 +273,18 @@ func enemy_status_check (enemy_name) -> void:
 		announcer_text(text)
 		await get_tree().create_timer(3).timeout
 		if player_take_turn == false:
+			enemy_take_turn = true
 			await get_tree().create_timer(1.5).timeout
 			text = "[center]You took the advantage and prepared to attack[/center]"
 			announcer_text(text)
 			await get_tree().create_timer(1.5).timeout
 			player_attack()
-		else:
-			enemy_process()
+		#else:
+			#enemy_process()
 		status_active = true
 		
-	
+	if player_take_turn == true:
+		enemy_process()
 	
 
 
@@ -316,6 +318,7 @@ func player_attack() -> void:
 		return
 	
 	if enemy_take_turn == false: # check if enemy hasn't attacked
+		player_take_turn = true
 		await get_tree().create_timer(1.5).timeout
 		text = "[center]Opponent took damage, now it's their turn[/center]"
 		announcer_text(text)
@@ -339,7 +342,7 @@ func player_attack() -> void:
 		if battling == false:
 			enable_button()
 	
-	enemy_take_turn = false
+		enemy_take_turn = false
 
 
 
