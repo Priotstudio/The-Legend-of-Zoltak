@@ -7,9 +7,11 @@
 script = ExtResource("1_5ie8q")
 action_name = "GLOOMDART"
 action_img = ExtResource("1_dgguk")
-action_type = "Mystic"
+action_type = "Shadow"
 action_attribute = 189
 critical_rate = "25%"
 cooldown = 0
+current_cooldown = 0
 cost = 245
 action_info = "A shadowed projectile that muffles sound and vision, striking with eerie silence."
+purchased = false

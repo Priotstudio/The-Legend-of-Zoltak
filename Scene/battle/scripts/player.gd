@@ -6,13 +6,18 @@ class_name Player extends AnimatedSprite2D
 @onready var hp_value: Label = $"../stats_view/hp_value"
 @onready var battle_scene: Node2D = $"../.."
 @onready var enemy: Enemy = $"../enemy"
+@onready var player_status_effect: Control = $"../player_status_effect"
 
 
+## Status effect
+var player_heal_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
+'texture' : 'res://Scene/battle/img/status_icon/heal.png', 'percentage' : 5.0, 'value' : 0}
 
 var player_damage
 var current_hp : int
 var selected_inv : Array = []
 var status_chance = 100
+var text : String
 
 # Stats
 var atk : int
@@ -190,21 +195,21 @@ func show_full_mod_stat (hp_m : Label, atk_m : Label, def_m : Label, dex_m : Lab
 		
 		
 		
-func perform_action (damage, action : Action) -> void:
+func perform_action (value, action : Action) -> void:
 	
 	## Physical modifer
 	if action.action_type == "Physical":
 		self.play("attack")
 		$hit_box_hit.play("hit")
-		damage = max(0, damage - enemy.def) # deduct damage from enemy def
-		SignalManager.enemy_damaged.emit(damage)
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
 		
 		
 	elif action.action_type == "Fire":
 		self.play("attack")
 		$hit_box_hit.play("hit")
-		damage = max(0, damage - enemy.def) # deduct damage from enemy def
-		SignalManager.enemy_damaged.emit(damage)
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
 		var roll = randi_range(1, 100)
 		if roll <= status_chance:
 			enemy.fire_status.active = true
@@ -213,8 +218,8 @@ func perform_action (damage, action : Action) -> void:
 	elif action.action_type == "Water":
 		self.play("attack")
 		$hit_box_hit.play("hit")
-		damage = max(0, damage - enemy.def) # deduct damage from enemy def
-		SignalManager.enemy_damaged.emit(damage)
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
 		var roll = randi_range(1, 100)
 		if roll <= status_chance:
 			enemy.water_status.active = true
@@ -223,8 +228,8 @@ func perform_action (damage, action : Action) -> void:
 	elif action.action_type == "Lightning":
 		self.play("attack")
 		$hit_box_hit.play("hit")
-		damage = max(0, damage - enemy.def)
-		SignalManager.enemy_damaged.emit(damage)
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
 		var roll = randi_range(1, 100)
 		if roll <= status_chance:
 			enemy.lightning_status.active = true
@@ -233,8 +238,8 @@ func perform_action (damage, action : Action) -> void:
 	elif action.action_type == "Ice":
 		self.play("attack")
 		$hit_box_hit.play("hit")
-		damage = max(0, damage - enemy.def)
-		SignalManager.enemy_damaged.emit(damage)
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
 		var roll = randi_range(1, 100)
 		if roll <= status_chance:
 			enemy.ice_status.active = true
@@ -243,21 +248,42 @@ func perform_action (damage, action : Action) -> void:
 	elif action.action_type == "Wind":
 		self.play("attack")
 		$hit_box_hit.play("hit")
-		damage = max(0, damage - enemy.def) # deduct damage from enemy def
-		SignalManager.enemy_damaged.emit(damage)
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
 		var roll = randi_range(1, 100)
 		if roll <= status_chance:
 			enemy.wind_status.active = true
 		pass
 	
 	elif action.action_type == "Earth":
-		pass
+		self.play("attack")
+		$hit_box_hit.play("hit")
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
+		var roll = randi_range(1, 100)
+		if roll <= status_chance:
+			enemy.earth_status.active = true
 		
 	elif action.action_type == "Mystic":
-		pass
-		
+		self.play("attack")
+		$"../player_effects/1".play("mystic") # Play mystic animation
+		$hit_box_hit.play("hit")
+		#damage = max(0, damage - enemy.def) ## Perfrom true damage ignoring enemy defence
+		SignalManager.enemy_damaged.emit(value)
+	
 	elif action.action_type == "Heal":
-		pass
+		if player_heal_status.active == true:
+			text = "[center][color=green]Heal[/color] status already in effect[/center]"
+			battle_scene.announcer_text(text)
+			return
+		player_heal_status.value = value
+		$"../player_effects/heal".play("show")
+		text = "[center]Your [color=green]HP[/color] ticks up for 3 turns"
+		battle_scene.announcer_text(text)
+		var roll = randi_range(1, 100)
+		if roll <= status_chance:
+			player_heal_status.active = true
+		
 		
 	elif action.action_type == "Defence":
 		pass
@@ -282,3 +308,98 @@ func perform_action (damage, action : Action) -> void:
 		
 	elif action.action_type == "Poison":
 		pass
+
+
+
+func status_effect () -> void:
+	await get_tree().create_timer(0.8).timeout
+	## PLAYER HEAL
+	if player_heal_status.active:
+		text = "[center][color=green]HP[/color] has slightly increased[/center]"
+		player_heal_status.turn += 1
+		if player_heal_status.turn >= player_heal_status.duration:
+			player_heal_status.active = false
+			player_heal_status.icon_on = false
+			player_heal_status.turn = 0
+			clear_status_icon("heal.png")
+			
+		
+		else:
+			if player_heal_status.icon_on == true:
+				# increase player hp
+				var value = (player_heal_status.percentage / 50.0) * player_heal_status.value
+				deal_status_dmg(value, 'heal')
+				#check_if_you_dead()
+			else:
+				check_if_status_icon_is_available(player_heal_status.texture)
+				player_heal_status.icon_on = true
+				battle_scene.announcer_text(text)
+				var dmg = (player_heal_status.percentage / 50.0) * player_heal_status.value
+				deal_status_dmg(dmg, "heal")
+				#check_if_you_dead()
+		await get_tree().create_timer(2.5).timeout
+
+
+
+func check_if_status_icon_is_available (texture_res) -> void:
+	if player_status_effect.status_1.texture == null:
+		player_status_effect.status_1.modulate.a = 0.0 # start transparent
+		player_status_effect.status_1.texture = load( texture_res ) # load texture
+		var tween = get_tree().create_tween()
+		tween.tween_property(player_status_effect.status_1, "modulate:a", 1.0, 1.0) # fade in
+	elif player_status_effect.status_2.texture == null:
+		player_status_effect.status_2.modulate.a = 0.0
+		player_status_effect.status_2.texture = load( texture_res )
+		var tween = get_tree().create_tween()
+		tween.tween_property(player_status_effect.status_2, "modulate:a", 1.0, 1.0)
+	elif player_status_effect.status_3.texture == null:
+		player_status_effect.status_3.modulate.a = 0.0
+		player_status_effect.status_3.texture = load( texture_res )
+		var tween = get_tree().create_tween()
+		tween.tween_property(player_status_effect.status_3, "modulate:a", 1.0, 1.0)
+	elif player_status_effect.status_4.texture == null:
+		player_status_effect.status_4.modulate.a = 0.0
+		player_status_effect.status_4.texture = load( texture_res )
+		var tween = get_tree().create_tween()
+		tween.tween_property(player_status_effect.status_4, "modulate:a", 1.0, 1.0)
+	elif player_status_effect.status_5.texture == null:
+		player_status_effect.status_5.modulate.a = 0.0
+		player_status_effect.status_5.texture = load( texture_res )
+		var tween = get_tree().create_tween()
+		tween.tween_property(player_status_effect.status_5, "modulate:a", 1.0, 1.0)
+		
+		
+func clear_status_icon (filename : String) -> void:
+	var status_1 : TextureRect =  player_status_effect.status_1
+	var status_2 : TextureRect =  player_status_effect.status_2
+	var status_3 : TextureRect =  player_status_effect.status_3
+	var status_4 : TextureRect =  player_status_effect.status_4
+	var status_5 : TextureRect =  player_status_effect.status_5
+	
+	if status_1.texture and status_1.texture.resource_path.get_file() == filename:
+		status_1.texture = null
+	elif status_2.texture and status_2.texture.resource_path.get_file() == filename:
+		status_2.texture = null
+	elif status_3.texture and status_3.texture.resource_path.get_file() == filename:
+		status_3.texture = null
+	elif status_4.texture and status_4.texture.resource_path.get_file() == filename:
+		status_4.texture = null
+	elif status_5.texture and status_5.texture.resource_path.get_file() == filename:
+		status_5.texture = null
+
+
+func deal_status_dmg (value, effect : String) -> void :	
+	if effect == 'heal':
+		value = int(value)
+		print(value)
+		$"../player_effects/heal".play("show") # play player effect heal
+		modulate_player(100,100,100,1) # flash player white
+		await get_tree().create_timer(0.3).timeout # wait 0.3 sec
+		modulate_player(1,1,1,1) # return player to normal
+		current_hp += value
+		if current_hp > player_hp.max_value:
+			current_hp = player_hp.max_value
+			player_hp.value = current_hp
+			return
+		
+		player_hp.value = current_hp

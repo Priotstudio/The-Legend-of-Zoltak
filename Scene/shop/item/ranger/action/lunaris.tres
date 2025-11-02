@@ -7,7 +7,7 @@
 script = ExtResource("1_1obp2")
 action_name = "LUNARIS"
 action_img = ExtResource("1_q2tbx")
-action_type = "Def Breaker"
+action_type = "Mystic"
 action_attribute = 150
 critical_rate = "20%"
 cooldown = 2

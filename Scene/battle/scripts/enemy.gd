@@ -32,6 +32,11 @@ var ice_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 
 'texture' : 'res://Scene/battle/img/status_icon/ice.png', 'percentage' : 5.0}
 var wind_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
 'texture' : 'res://Scene/battle/img/status_icon/wind.png', 'percentage' : 5.0}
+var earth_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
+'texture' : 'res://Scene/battle/img/status_icon/earth.png', 'percentage' : 5.0}
+var player_heal_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
+'texture' : 'res://Scene/battle/img/status_icon/heal.png', 'percentage' : 5.0, 'value' : 0}
+
 
 var paralized : bool = false
 var frozen : bool = false
@@ -347,6 +352,34 @@ func status_effect () -> void:
 				deal_status_dmg(dmg, "wind")
 				check_if_you_dead()
 		await get_tree().create_timer(2.5).timeout
+		
+	## EARTH
+	if earth_status.active:
+		text = "[center]" + enemy_name + " defences have been pierced with [color=brown]rock [/color]shards[/center]"
+		earth_status.turn += 1
+		if earth_status.turn >= earth_status.duration:
+			earth_status.active = false
+			earth_status.icon_on = false
+			earth_status.turn = 0
+			clear_status_icon("earth.png")
+			def = current_def
+		
+		else:
+			if earth_status.icon_on == true:
+				# make enemy def be reduced
+				var dmg = (earth_status.percentage / 25.0) * def
+				deal_status_dmg(dmg, 'earth')
+				check_if_you_dead()
+			else:
+				check_if_status_icon_is_available(earth_status.texture)
+				earth_status.icon_on = true
+				battle_scene.announcer_text(text)
+				var dmg = (earth_status.percentage / 25.0) * def
+				deal_status_dmg(dmg, "earth")
+				check_if_you_dead()
+		await get_tree().create_timer(2.5).timeout
+		
+	
 
 
 
@@ -445,6 +478,28 @@ func deal_status_dmg (dmg, effect : String) -> void :
 		$"../enemy_dmg hit".text = str (dmg)
 		$emeny_dmg.play("dmg")
 		dex -= dmg
+		
+	elif effect == 'earth':
+		dmg = int (dmg)
+		modulate = 'brown'
+		$AnimationPlayer.play("hit")
+		await get_tree().create_timer(0.4).timeout
+		modulate = "white"
+		$"../enemy_dmg hit".text = str (dmg)
+		$emeny_dmg.play("dmg")
+		def -= dmg
+	
+	elif effect == 'heal':
+		dmg = int(dmg)
+		$"../player_effects/heal".play("show") # play player effect heal
+		print (player.current_hp)
+		player.current_hp += dmg
+		if player.current_hp > player.player_hp.max_value:
+			player.current_hp = player.player_hp.max_value
+			player.player_hp.value = player.current_hp
+			return
+		
+		player.player_hp.value = player.current_hp
 
 
 func check_if_you_dead () -> void:

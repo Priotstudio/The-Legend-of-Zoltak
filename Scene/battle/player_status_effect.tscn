@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://bp65hp2pp1u52"]
+
+[ext_resource type="Script" path="res://Scene/battle/scripts/player_status_effect.gd" id="1_0ope4"]
+[ext_resource type="Texture2D" uid="uid://c0i1ctu0sceq1" path="res://Scene/battle/img/status_icon/fire_2.png" id="2_024tf"]
+[ext_resource type="Texture2D" uid="uid://cd1hqj88emre3" path="res://Scene/battle/img/status_icon/bleed.png" id="3_dbjyr"]
+[ext_resource type="Texture2D" uid="uid://6oq3frjxu88s" path="res://Scene/battle/img/status_icon/defence.png" id="4_ih6fr"]
+[ext_resource type="Texture2D" uid="uid://cxcpllmgif3gm" path="res://Scene/battle/img/status_icon/wind.png" id="5_chfco"]
+[ext_resource type="Texture2D" uid="uid://ccttioyufpla4" path="res://Scene/battle/img/status_icon/poison.png" id="6_pnuir"]
+
+[node name="player_status_effect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ope4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 24.0
+scale = Vector2(1.87714, 1.87714)
+alignment = 1
+
+[node name="status 1" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_024tf")
+stretch_mode = 2
+
+[node name="status 2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_dbjyr")
+
+[node name="status 3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_ih6fr")
+
+[node name="status 4" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_chfco")
+
+[node name="status 5" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_pnuir")

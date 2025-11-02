@@ -243,6 +243,7 @@ func enemy_process () -> void:
 	announcer_text(text)
 	
 	enemy.status_effect() # check for status effect
+	player.status_effect() # check for player status
 	await get_tree().create_timer(3).timeout
 	battling = false
 	
@@ -333,6 +334,7 @@ func player_attack() -> void:
 		announcer_text(text)
 		
 		enemy.status_effect() # check for status effect
+		player.status_effect() # check for player effect
 		battling = false
 		if battling == false:
 			enable_button()
