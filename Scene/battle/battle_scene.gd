@@ -192,11 +192,14 @@ func enemy_attack (enemy_name, move_name, damage, anim_name) -> void:
 	if battling == true:
 		disable_button()
 		
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1).timeout
 	
 	## Some status checks will be added here
 	await enemy_status_check(enemy_name)
 	if status_active == true:
+		print ('status active')
+		if player_take_turn == true:
+			enemy_process()
 		return
 	
 	
@@ -205,10 +208,10 @@ func enemy_attack (enemy_name, move_name, damage, anim_name) -> void:
 	await get_tree().create_timer(2).timeout
 	
 	## Perform action type
-	enemy.perform_action(damage, player_def_mod)
+	await enemy.perform_action(damage, player_def_mod)
 	
 	
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(0.5).timeout
 	# Check if player has no hp left
 	if player.current_hp <= 0:
 		game_over()
@@ -222,6 +225,7 @@ func enemy_attack (enemy_name, move_name, damage, anim_name) -> void:
 		announcer_text(text)
 		player_attack()
 		return
+	
 	
 	enemy_process()
 	
@@ -237,14 +241,18 @@ func enemy_process () -> void:
 		battle_gauge.frame -= 1
 		_battle_gauge()
 	
+	
+	
+	
 	player_take_turn = false
 	text = "[center]The air grew thick filled with a strange ominous aura[/center]" # announer for turn end
-	announcer_text(text)
+	await announcer_text(text)
 	
+	await get_tree().create_timer(2).timeout
 	enemy.status_effect() # check for status effect
 	player.status_effect() # check for player status
-	await get_tree().create_timer(3).timeout
 	battling = false
+	
 	
 	if battling == false:
 		enable_button()
@@ -283,8 +291,7 @@ func enemy_status_check (enemy_name) -> void:
 			#enemy_process()
 		status_active = true
 		
-	if player_take_turn == true:
-		enemy_process()
+	
 	
 
 
@@ -307,8 +314,8 @@ func player_attack() -> void:
 	
 	## This is where the move type gets checked to perform it properties
 	## Eg if it a stun or poisen type move it does it work rather than just dmg
-	player.perform_action (damage, action)
-	await get_tree().create_timer(2).timeout
+	await player.perform_action (damage, action)
+	await get_tree().create_timer(3).timeout
 	
 	
 	## Check if enemy has no hp left
@@ -319,12 +326,14 @@ func player_attack() -> void:
 	
 	if enemy_take_turn == false: # check if enemy hasn't attacked
 		player_take_turn = true
-		await get_tree().create_timer(1.5).timeout
-		text = "[center]Opponent took damage, now it's their turn[/center]"
+		await get_tree().create_timer(1).timeout
+		text = "[center]Opponent takes their turn[/center]"
 		announcer_text(text)
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(1).timeout
 		enemy.attack_player()
+		return
 	else:
+		
 		## increase counter
 		turn_counter += 1
 		if battle_gauge.frame == 0:

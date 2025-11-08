@@ -12,6 +12,8 @@ class_name Player extends AnimatedSprite2D
 ## Status effect
 var player_heal_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
 'texture' : 'res://Scene/battle/img/status_icon/heal.png', 'percentage' : 5.0, 'value' : 0}
+var player_defence_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
+'texture' : 'res://Scene/battle/img/status_icon/defence.png', 'percentage' : 5.0, 'value' : 0}
 
 var player_damage
 var current_hp : int
@@ -34,6 +36,10 @@ var final_dex
 var final_int
 var final_wis
 var final_con
+
+# current stats
+var original_def
+var current_armor_def
 
 # equipment mod
 var headgear_def 
@@ -130,7 +136,7 @@ func load_selected_inv () -> void:
 	
 	armor_def = headgear_def + chestplate_def + leggings_def
 	
-	
+	current_armor_def = armor_def
 		
 func set_battle_stat () -> void:
 	atk = GlobalGameSystem.player_atk 
@@ -149,6 +155,9 @@ func set_battle_stat () -> void:
 	
 	
 	set_stat_view()
+	
+	
+	
 	pass
 
 func set_stat_view () -> void:
@@ -266,7 +275,7 @@ func perform_action (value, action : Action) -> void:
 		
 	elif action.action_type == "Mystic":
 		self.play("attack")
-		$"../player_effects/1".play("mystic") # Play mystic animation
+		$"../player_effects/mystic".play("mystic") # Play mystic animation
 		$hit_box_hit.play("hit")
 		#damage = max(0, damage - enemy.def) ## Perfrom true damage ignoring enemy defence
 		SignalManager.enemy_damaged.emit(value)
@@ -285,7 +294,18 @@ func perform_action (value, action : Action) -> void:
 			player_heal_status.active = true
 		
 	elif action.action_type == "Defence":
-		pass
+		if player_defence_status.active == true:
+			text = "[center][color=blue]ARMOR DEFENCE[/color] status already in effect[/center]"
+			battle_scene.announcer_text(text)
+			return
+		player_defence_status.value = value
+		$"../player_effects/2".play("defence")
+		text = "[center]Your [color=blue]ARMOR DEFENCE[/color] ticks up for 3 turns"
+		battle_scene.announcer_text(text)
+		var roll = randi_range(1, 100)
+		if roll <= status_chance:
+			player_defence_status.active = true
+	
 	
 	elif action.action_type == "Atk Down":
 		pass
@@ -311,7 +331,7 @@ func perform_action (value, action : Action) -> void:
 
 
 func status_effect () -> void:
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(2.5).timeout
 	## PLAYER HEAL
 	if player_heal_status.active:
 		text = "[center][color=green]HP[/color] has slightly increased[/center]"
@@ -327,6 +347,7 @@ func status_effect () -> void:
 			if player_heal_status.icon_on == true:
 				# increase player hp
 				var value = (player_heal_status.percentage / 50.0) * player_heal_status.value
+				battle_scene.announcer_text(text)
 				deal_status_dmg(value, 'heal')
 				#check_if_you_dead()
 			else:
@@ -335,6 +356,37 @@ func status_effect () -> void:
 				battle_scene.announcer_text(text)
 				var dmg = (player_heal_status.percentage / 50.0) * player_heal_status.value
 				deal_status_dmg(dmg, "heal")
+				#check_if_you_dead()
+		await get_tree().create_timer(2.5).timeout
+		
+	##PLAYER DEFENCE
+	if player_defence_status.active:
+		text = "[center][color=blue]ARMOR DEFENCE[/color] has slightly increased[/center]"
+		player_defence_status.turn += 1
+		if player_defence_status.turn >= player_defence_status.duration:
+			player_defence_status.active = false
+			player_defence_status.icon_on = false
+			player_defence_status.turn = 0
+			armor_def = current_armor_def
+			set_battle_stat() ## original stat points
+			$"../full_stats_info/Panel/stat2/arm_def".text = str(armor_def)
+			def_value.text = str (final_def + armor_def)
+			clear_status_icon("defence.png")
+			
+		
+		else:
+			if player_defence_status.icon_on == true:
+				# increase player defence
+				var value = (player_defence_status.percentage /75.0) * player_defence_status.value
+				battle_scene.announcer_text(text)
+				deal_status_dmg(value, 'defence')
+				#check_if_you_dead()
+			else:
+				check_if_status_icon_is_available(player_defence_status.texture)
+				player_defence_status.icon_on = true
+				battle_scene.announcer_text(text)
+				var dmg = (player_defence_status.percentage / 75.0) * player_defence_status.value
+				deal_status_dmg(dmg, "defence")
 				#check_if_you_dead()
 		await get_tree().create_timer(2.5).timeout
 
@@ -401,3 +453,19 @@ func deal_status_dmg (value, effect : String) -> void :
 			return
 		
 		player_hp.value = current_hp
+		$"../stats_view/hp_value".text = str (current_hp)
+		
+	elif effect == 'defence':
+		set_battle_stat() ## original stat points
+		value = int(value)
+		$"../player_effects/2".play("defence") # play player effect defence
+		modulate_player(100,100,100,1) # flash player white
+		await get_tree().create_timer(0.3).timeout # wait 0.3 sec
+		modulate_player(1,1,1,1) # return player to normal
+		armor_def += value
+		#if current_hp > player_hp.max_value:
+			#current_hp = player_hp.max_value
+			#player_hp.value = current_hp
+			#return
+		$"../full_stats_info/Panel/stat2/arm_def".text = str(armor_def)
+		def_value.text = str (final_def + armor_def)
