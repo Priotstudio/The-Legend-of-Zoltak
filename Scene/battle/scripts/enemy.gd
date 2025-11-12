@@ -12,6 +12,9 @@ var current_hp
 var current_move : Action
 var current_animation
 var enemy_name
+var status_animation := false
+var current_status_animation : String
+
 
 @export var enemy_data : Enemies_res
 
@@ -19,6 +22,8 @@ var enemy_name
 @onready var player: Player = $"../player"
 @onready var camera: Camera2D = $"../Camera2D"
 @onready var battle_scene: Node2D = $"../.."
+@onready var enemy_effects: AnimatedSprite2D = $enemy_effects
+
 
 
 # Status effecs
@@ -36,6 +41,8 @@ var earth_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0
 'texture' : 'res://Scene/battle/img/status_icon/earth.png', 'percentage' : 5.0}
 var player_heal_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
 'texture' : 'res://Scene/battle/img/status_icon/heal.png', 'percentage' : 5.0, 'value' : 0}
+var attack_down_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
+'texture' : 'res://Scene/battle/img/status_icon/attack_down.png', 'percentage' : 5.0}
 
 
 var paralized : bool = false
@@ -157,6 +164,11 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 		
 	$AnimationPlayer.play("idle")
 	$AnimationPlayer.seek(0.0, true)
+	
+	# once main animation ends check if we still have a status animation to play
+	if status_animation == true:
+			enemy_effects.play(current_status_animation)
+			enemy_effects.visible = true
 	pass # Replace with function body.
 
 
@@ -165,6 +177,12 @@ func perform_action (damage, player_def_mod) -> void:
 	
 	## Physical modifer
 	if current_move.action_type == "Physical":
+		
+		# if there is a status effect animation current stop it for the mean time
+		if status_animation == true:
+			enemy_effects.stop()
+			enemy_effects.visible = false
+		
 		$AnimationPlayer.play(current_animation)
 		damage = max(0, damage - int((player_def_mod / 2))) # player def deducts damage
 		SignalManager.player_damaged.emit(damage)
@@ -379,6 +397,40 @@ func status_effect () -> void:
 				check_if_you_dead()
 		await get_tree().create_timer(2.5).timeout
 		
+	## ATTACK DOWN
+	if attack_down_status.active:
+		var current_atk = atk
+		text = "[center]" + enemy_name + "[color=red] ATTACK [/color]prowess is waning![/center]"
+		attack_down_status.turn += 1
+		if attack_down_status.turn >= attack_down_status.duration:
+			attack_down_status.active = false
+			attack_down_status.icon_on = false
+			attack_down_status.turn = 0
+			clear_status_icon("attack_down.png")
+			modulate = "white"
+			atk = current_atk
+			enemy_effects.visible = false
+			enemy_effects.stop()
+			status_animation = false
+			
+		
+		else:
+			if attack_down_status.icon_on == true:
+				# reduce enemy attacks
+				var dmg = (attack_down_status.percentage / 25.0) * atk
+				deal_status_dmg(dmg, 'attack_down')
+				check_if_you_dead()
+			else:
+				check_if_status_icon_is_available(attack_down_status.texture)
+				enemy_effects.play("attack_down")
+				current_status_animation = 'attack_down'
+				status_animation = true
+				attack_down_status.icon_on = true
+				battle_scene.announcer_text(text)
+				var dmg = (attack_down_status.percentage / 25.0) * def
+				deal_status_dmg(dmg, "attack_down")
+				check_if_you_dead()
+		await get_tree().create_timer(2.5).timeout
 	
 
 
@@ -500,6 +552,16 @@ func deal_status_dmg (dmg, effect : String) -> void :
 			return
 		
 		player.player_hp.value = player.current_hp
+		
+	elif effect == 'attack_down':
+		dmg = int (dmg)
+		modulate = 'ff7f6e'
+		$AnimationPlayer.play("hit")
+		await get_tree().create_timer(0.4).timeout
+		$"../enemy_dmg hit".text = str (dmg)
+		$emeny_dmg.play("dmg")
+		atk -= dmg
+		print(atk)
 
 
 func check_if_you_dead () -> void:

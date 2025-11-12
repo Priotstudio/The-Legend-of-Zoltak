@@ -7,9 +7,11 @@
 script = ExtResource("1_d6gmp")
 action_name = "UMBRA VAULT"
 action_img = ExtResource("1_cppar")
-action_type = "Shadow"
+action_type = "Atk Down"
 action_attribute = 190
 critical_rate = "55%"
 cooldown = 3
+current_cooldown = 0
 cost = 240
 action_info = "Blink through shadows to strike from impossible angles, gone before the foe can respond."
+purchased = false

@@ -7,9 +7,11 @@
 script = ExtResource("1_hm4ju")
 action_name = "MIND SPIKE"
 action_img = ExtResource("1_0f8om")
-action_type = "Defence Breaker"
+action_type = "Def Breaker"
 action_attribute = 45
 critical_rate = "2%"
 cooldown = 1
+current_cooldown = 0
 cost = 0
 action_info = "Fire a sharp psychic  bolt at a single enemy, ignoring their defense."
+purchased = false

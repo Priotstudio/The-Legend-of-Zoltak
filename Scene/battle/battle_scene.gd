@@ -241,9 +241,6 @@ func enemy_process () -> void:
 		battle_gauge.frame -= 1
 		_battle_gauge()
 	
-	
-	
-	
 	player_take_turn = false
 	text = "[center]The air grew thick filled with a strange ominous aura[/center]" # announer for turn end
 	await announcer_text(text)

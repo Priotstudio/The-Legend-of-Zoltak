@@ -1,4 +1,4 @@
-[gd_scene load_steps=155 format=3 uid="uid://c4t5kvfjhunpx"]
+[gd_scene load_steps=221 format=3 uid="uid://c4t5kvfjhunpx"]
 
 [ext_resource type="Texture2D" uid="uid://c8djmc0u3trd1" path="res://Scene/battle/img/1000022662.jpg" id="1_fawxu"]
 [ext_resource type="Script" path="res://Scene/battle/battle_scene.gd" id="1_td1xy"]
@@ -86,23 +86,88 @@
 [ext_resource type="Texture2D" uid="uid://bdxoxg6p1dove" path="res://Asset/Rpg1/panelInset_brown.png" id="56_7pqr2"]
 [ext_resource type="Texture2D" uid="uid://6iyosni310om" path="res://Asset/img/other/HeartIcons_32x32.png" id="57_481kb"]
 [ext_resource type="Texture2D" uid="uid://1ttd8whwn3in" path="res://Asset/img/buff_skill/Buffs/regeneration.png" id="58_2xmfj"]
-[ext_resource type="Texture2D" uid="uid://dpq440jde75jm" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame1.png" id="58_msbiw"]
-[ext_resource type="Texture2D" uid="uid://d2qte7ki8ox53" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame2.png" id="59_djvsh"]
+[ext_resource type="Texture2D" uid="uid://dc2cfngy5aq0n" path="res://Scene/battle/img/effects/4/Holy VFX 02 1.png" id="58_q0gj8"]
 [ext_resource type="Texture2D" uid="uid://bwqq2cf6eo5xy" path="res://Asset/img/buff_skill/Buffs/swiftness.png" id="59_lfa2c"]
-[ext_resource type="Texture2D" uid="uid://eph4imsujtt8" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame3.png" id="60_wk1am"]
+[ext_resource type="Texture2D" uid="uid://dpesup13qqhpu" path="res://Scene/battle/img/effects/4/Holy VFX 02 2.png" id="59_nsck3"]
+[ext_resource type="Texture2D" uid="uid://sfia1wkllxjt" path="res://Scene/battle/img/effects/4/Holy VFX 02 3.png" id="60_f7veu"]
 [ext_resource type="Texture2D" uid="uid://b3pvyptq772c5" path="res://Asset/img/other/PatternMiddleBottomBG_199x48.png" id="61_1n4f5"]
-[ext_resource type="Texture2D" uid="uid://7vyh07lx8w8f" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame4.png" id="61_guj7e"]
-[ext_resource type="Texture2D" uid="uid://ctayf7g3gwtm5" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame5.png" id="62_0xa5p"]
-[ext_resource type="Texture2D" uid="uid://2gtxeaoxc8lr" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame6.png" id="63_vswyp"]
-[ext_resource type="Texture2D" uid="uid://075muvfsd44y" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame7.png" id="64_ggnx7"]
-[ext_resource type="Texture2D" uid="uid://by10wajb4acot" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame8.png" id="65_d6kjf"]
-[ext_resource type="Texture2D" uid="uid://b1a7cyc6mob4" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame9.png" id="66_4vfgd"]
-[ext_resource type="Texture2D" uid="uid://dumkhhtc075fv" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame10.png" id="67_viy7r"]
-[ext_resource type="Texture2D" uid="uid://cb3ifwk2kfvo1" path="res://Scene/battle/img/effects/heal/Priest_skill2_frame11.png" id="68_fiddv"]
+[ext_resource type="Texture2D" uid="uid://ceiqlgwev2r1b" path="res://Scene/battle/img/effects/4/Holy VFX 02 4.png" id="61_fe7j6"]
+[ext_resource type="Texture2D" uid="uid://dep461gg1v03n" path="res://Scene/battle/img/effects/4/Holy VFX 02 5.png" id="62_nxnvc"]
+[ext_resource type="Texture2D" uid="uid://c210oxey27qwf" path="res://Scene/battle/img/effects/4/Holy VFX 02 6.png" id="63_4xt8o"]
+[ext_resource type="Texture2D" uid="uid://dcpkhabig2jpa" path="res://Scene/battle/img/effects/4/Holy VFX 02 7.png" id="64_ug5nt"]
+[ext_resource type="Texture2D" uid="uid://b4jy6ng75wsrq" path="res://Scene/battle/img/effects/4/Holy VFX 02 8.png" id="65_36wvm"]
+[ext_resource type="Texture2D" uid="uid://62lllymfdq13" path="res://Scene/battle/img/effects/4/Holy VFX 02 9.png" id="66_bd3ou"]
+[ext_resource type="Texture2D" uid="uid://clgl1vmn51y04" path="res://Scene/battle/img/effects/4/Holy VFX 02 10.png" id="67_xrc7k"]
+[ext_resource type="Texture2D" uid="uid://5oikrl7m8lxj" path="res://Scene/battle/img/effects/4/Holy VFX 02 11.png" id="68_u7586"]
+[ext_resource type="Texture2D" uid="uid://cmoke7tl2vxlx" path="res://Scene/battle/img/effects/4/Holy VFX 02 12.png" id="69_dole7"]
+[ext_resource type="Texture2D" uid="uid://0wky574u0cwm" path="res://Scene/battle/img/effects/4/Holy VFX 02 13.png" id="70_5pn7t"]
+[ext_resource type="Texture2D" uid="uid://dhu0t0qmqkdcg" path="res://Scene/battle/img/effects/4/Holy VFX 02 14.png" id="71_u82i5"]
+[ext_resource type="Texture2D" uid="uid://dorgm6mvmtsdu" path="res://Scene/battle/img/effects/4/Holy VFX 02 15.png" id="72_d2m05"]
+[ext_resource type="Texture2D" uid="uid://cs8ihry23k2ma" path="res://Scene/battle/img/effects/4/Holy VFX 02 16.png" id="73_3woti"]
+[ext_resource type="Texture2D" uid="uid://chcwa0a2d30fy" path="res://Scene/battle/img/effects/3/1_0.png" id="78_g7s5v"]
+[ext_resource type="Texture2D" uid="uid://hocm36yfg6ev" path="res://Scene/battle/img/effects/3/1_1.png" id="79_b8kbc"]
+[ext_resource type="Texture2D" uid="uid://dqli04jux8ipi" path="res://Scene/battle/img/effects/3/1_2.png" id="80_syrbn"]
 [ext_resource type="Texture2D" uid="uid://j1w26ofdr10r" path="res://Asset/Rpg1/panelInset_beigeLight.png" id="81_18pft"]
+[ext_resource type="Texture2D" uid="uid://csxcasj3cxetu" path="res://Scene/battle/img/effects/3/1_3.png" id="81_lxmwl"]
+[ext_resource type="Texture2D" uid="uid://cae8y2hogr76r" path="res://Scene/battle/img/effects/3/1_4.png" id="82_wmdhw"]
+[ext_resource type="Texture2D" uid="uid://dx4ex20abx4wl" path="res://Scene/battle/img/effects/3/1_5.png" id="83_18as7"]
+[ext_resource type="Texture2D" uid="uid://dw8hh0w0ow8mm" path="res://Scene/battle/img/effects/3/1_6.png" id="84_4iwi7"]
+[ext_resource type="Texture2D" uid="uid://80vj1kr68rvw" path="res://Scene/battle/img/effects/3/1_7.png" id="85_prwur"]
 [ext_resource type="Script" path="res://Scene/battle/camera_shake.gd" id="86_rf2ux"]
+[ext_resource type="Texture2D" uid="uid://bttpqee4vnmda" path="res://Scene/battle/img/effects/3/1_8.png" id="86_w204j"]
+[ext_resource type="Texture2D" uid="uid://bafe8kt8fxxjp" path="res://Scene/battle/img/effects/3/1_9.png" id="87_de144"]
 [ext_resource type="Texture2D" uid="uid://l6r2c3jt2coe" path="res://Scene/battle/img/RRIOF144.png" id="87_l1e6c"]
+[ext_resource type="Texture2D" uid="uid://jjbqfvgvv7h3" path="res://Scene/battle/img/effects/3/1_10.png" id="88_5t7bs"]
 [ext_resource type="PackedScene" uid="uid://c8ym5qkfh5k17" path="res://Scene/battle/enemy_status_effect.tscn" id="88_x01e0"]
+[ext_resource type="Texture2D" uid="uid://dflge2v2d64sc" path="res://Scene/battle/img/effects/3/1_11.png" id="89_28hms"]
+[ext_resource type="Texture2D" uid="uid://fu5dv2q3mlaw" path="res://Scene/battle/img/effects/3/1_12.png" id="90_1gu5j"]
+[ext_resource type="Texture2D" uid="uid://b1e6nsb3qqmia" path="res://Scene/battle/img/effects/3/1_13.png" id="91_8qaqm"]
+[ext_resource type="Texture2D" uid="uid://b4swosnb43es7" path="res://Scene/battle/img/effects/3/1_14.png" id="92_cyw5n"]
+[ext_resource type="Texture2D" uid="uid://dmcxsrl8wyi5r" path="res://Scene/battle/img/effects/3/1_15.png" id="93_w8ayr"]
+[ext_resource type="Texture2D" uid="uid://dfjg3urhyiwg6" path="res://Scene/battle/img/effects/3/1_16.png" id="94_mdm7s"]
+[ext_resource type="Texture2D" uid="uid://cw5b1xa1w87jj" path="res://Scene/battle/img/effects/3/1_17.png" id="95_4kwrn"]
+[ext_resource type="Texture2D" uid="uid://bwmr16jgnwei7" path="res://Scene/battle/img/effects/3/1_18.png" id="96_473i7"]
+[ext_resource type="Texture2D" uid="uid://cqc52a501geod" path="res://Scene/battle/img/effects/3/1_19.png" id="97_xikk5"]
+[ext_resource type="Texture2D" uid="uid://cj7iq6m5i0cwv" path="res://Scene/battle/img/effects/3/1_20.png" id="98_bsunr"]
+[ext_resource type="Texture2D" uid="uid://crietkyfl0n0u" path="res://Scene/battle/img/effects/3/1_21.png" id="99_4ti6y"]
+[ext_resource type="Texture2D" uid="uid://dvq30jtpqhh8" path="res://Scene/battle/img/effects/3/1_22.png" id="100_uknna"]
+[ext_resource type="Texture2D" uid="uid://dhm3g6y2mkdnw" path="res://Scene/battle/img/effects/3/1_23.png" id="101_s36mb"]
+[ext_resource type="Texture2D" uid="uid://dloteiqprhbmj" path="res://Scene/battle/img/effects/3/1_24.png" id="102_tx2v8"]
+[ext_resource type="Texture2D" uid="uid://52fp1c1fcq1k" path="res://Scene/battle/img/effects/3/1_25.png" id="103_ybveg"]
+[ext_resource type="Texture2D" uid="uid://b3fharun0sls7" path="res://Scene/battle/img/effects/3/1_26.png" id="104_e66ae"]
+[ext_resource type="Texture2D" uid="uid://bw8ibq8fesyg3" path="res://Scene/battle/img/effects/3/1_27.png" id="105_g47oc"]
+[ext_resource type="Texture2D" uid="uid://cj51lt06fttix" path="res://Scene/battle/img/effects/3/1_28.png" id="106_dpd1u"]
+[ext_resource type="Texture2D" uid="uid://bnoam2xucnl7e" path="res://Scene/battle/img/effects/3/1_29.png" id="107_uupr2"]
+[ext_resource type="Texture2D" uid="uid://dg0hwpuy5xp53" path="res://Scene/battle/img/effects/3/1_30.png" id="108_3h50w"]
+[ext_resource type="Texture2D" uid="uid://yxfnnu7mn3rd" path="res://Scene/battle/img/effects/3/1_31.png" id="109_aov5e"]
+[ext_resource type="Texture2D" uid="uid://bdd0wcke2kvmy" path="res://Scene/battle/img/effects/3/1_32.png" id="110_3jdkd"]
+[ext_resource type="Texture2D" uid="uid://0e7es41y7r6d" path="res://Scene/battle/img/effects/3/1_33.png" id="111_eaoek"]
+[ext_resource type="Texture2D" uid="uid://dpjplgw8rr5k3" path="res://Scene/battle/img/effects/3/1_34.png" id="112_3jsiu"]
+[ext_resource type="Texture2D" uid="uid://dhcn7ljuo3myk" path="res://Scene/battle/img/effects/3/1_35.png" id="113_u6pvq"]
+[ext_resource type="Texture2D" uid="uid://dg8dvfjdwgwnt" path="res://Scene/battle/img/effects/3/1_36.png" id="114_gmvyc"]
+[ext_resource type="Texture2D" uid="uid://duotesel6x83l" path="res://Scene/battle/img/effects/3/1_37.png" id="115_75ogd"]
+[ext_resource type="Texture2D" uid="uid://tcihukxal7ca" path="res://Scene/battle/img/effects/3/1_38.png" id="116_66cnh"]
+[ext_resource type="Texture2D" uid="uid://cyj5cw37vwdjm" path="res://Scene/battle/img/effects/3/1_39.png" id="117_ejwn5"]
+[ext_resource type="Texture2D" uid="uid://obt0a00ulxkf" path="res://Scene/battle/img/effects/3/1_40.png" id="118_ehslk"]
+[ext_resource type="Texture2D" uid="uid://dgpr28br1n77e" path="res://Scene/battle/img/effects/3/1_41.png" id="119_gvkmr"]
+[ext_resource type="Texture2D" uid="uid://yrtxgivlc1g3" path="res://Scene/battle/img/effects/3/1_42.png" id="120_vh8hd"]
+[ext_resource type="Texture2D" uid="uid://cjgocsyapid6q" path="res://Scene/battle/img/effects/3/1_43.png" id="121_uiemx"]
+[ext_resource type="Texture2D" uid="uid://dlx66cr873vp8" path="res://Scene/battle/img/effects/3/1_44.png" id="122_iyxh4"]
+[ext_resource type="Texture2D" uid="uid://ej47wp2nqkay" path="res://Scene/battle/img/effects/3/1_45.png" id="123_uh7et"]
+[ext_resource type="Texture2D" uid="uid://bli2sfdao6qpa" path="res://Scene/battle/img/effects/3/1_46.png" id="124_jvyat"]
+[ext_resource type="Texture2D" uid="uid://ddp2ghfssbatv" path="res://Scene/battle/img/effects/3/1_47.png" id="125_xmqds"]
+[ext_resource type="Texture2D" uid="uid://cs1voqhgh5t82" path="res://Scene/battle/img/effects/3/1_48.png" id="126_hddq6"]
+[ext_resource type="Texture2D" uid="uid://cogqtow2f23bo" path="res://Scene/battle/img/effects/3/1_49.png" id="127_trek5"]
+[ext_resource type="Texture2D" uid="uid://cytlq5hdclsjs" path="res://Scene/battle/img/effects/3/1_50.png" id="128_dcalx"]
+[ext_resource type="Texture2D" uid="uid://dkxt45k65g5qq" path="res://Scene/battle/img/effects/3/1_51.png" id="129_8ymvd"]
+[ext_resource type="Texture2D" uid="uid://x1od615mhrkp" path="res://Scene/battle/img/effects/3/1_52.png" id="130_oawha"]
+[ext_resource type="Texture2D" uid="uid://c4t6waox27hek" path="res://Scene/battle/img/effects/3/1_53.png" id="131_1wy06"]
+[ext_resource type="Texture2D" uid="uid://d3tu2wna20e6a" path="res://Scene/battle/img/effects/3/1_54.png" id="132_lqc6g"]
+[ext_resource type="Texture2D" uid="uid://d0u0ekq7ljay4" path="res://Scene/battle/img/effects/3/1_55.png" id="133_vsglx"]
+[ext_resource type="Texture2D" uid="uid://c0rbrr4ng27yo" path="res://Scene/battle/img/effects/3/1_56.png" id="134_6gy1b"]
+[ext_resource type="Texture2D" uid="uid://dn8oj33cdk8kf" path="res://Scene/battle/img/effects/3/1_57.png" id="135_43lud"]
+[ext_resource type="Texture2D" uid="uid://dtlfce7tu1fp4" path="res://Scene/battle/img/effects/3/1_58.png" id="136_730sm"]
+[ext_resource type="Texture2D" uid="uid://b4bq0jv8853ur" path="res://Scene/battle/img/effects/3/1_59.png" id="137_4vph6"]
 
 [sub_resource type="Animation" id="Animation_wqjyr"]
 length = 0.001
@@ -597,43 +662,52 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("53_7tyh3")
+"texture": ExtResource("58_q0gj8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("58_msbiw")
+"texture": ExtResource("59_nsck3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("59_djvsh")
+"texture": ExtResource("60_f7veu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("60_wk1am")
+"texture": ExtResource("61_fe7j6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("61_guj7e")
+"texture": ExtResource("62_nxnvc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("62_0xa5p")
+"texture": ExtResource("63_4xt8o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("63_vswyp")
+"texture": ExtResource("64_ug5nt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("64_ggnx7")
+"texture": ExtResource("65_36wvm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("65_d6kjf")
+"texture": ExtResource("66_bd3ou")
 }, {
 "duration": 1.0,
-"texture": ExtResource("66_4vfgd")
+"texture": ExtResource("67_xrc7k")
 }, {
 "duration": 1.0,
-"texture": ExtResource("67_viy7r")
+"texture": ExtResource("68_u7586")
 }, {
 "duration": 1.0,
-"texture": ExtResource("68_fiddv")
+"texture": ExtResource("69_dole7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("53_7tyh3")
+"texture": ExtResource("70_5pn7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_u82i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_d2m05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_3woti")
 }],
 "loop": false,
 "name": &"mystic",
@@ -1072,6 +1146,194 @@ _data = {
 "RESET": SubResource("Animation_djunl"),
 "show": SubResource("Animation_cjcqf")
 }
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i41is"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("78_g7s5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_b8kbc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_syrbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_lxmwl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_wmdhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_18as7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_4iwi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_prwur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_w204j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_de144")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_5t7bs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_28hms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_1gu5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_8qaqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_cyw5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_w8ayr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_mdm7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_4kwrn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_473i7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_xikk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_bsunr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_4ti6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_uknna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_s36mb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_tx2v8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_ybveg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_e66ae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_g47oc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_dpd1u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_uupr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_3h50w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_aov5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_3jdkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_eaoek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_3jsiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_u6pvq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_gmvyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_75ogd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_66cnh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_ejwn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_ehslk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_gvkmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_vh8hd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("121_uiemx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_iyxh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_uh7et")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_jvyat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_xmqds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_hddq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_trek5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_dcalx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_8ymvd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_oawha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("131_1wy06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_lqc6g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_vsglx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("134_6gy1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_43lud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_730sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_4vph6")
+}],
+"loop": true,
+"name": &"attack_down",
+"speed": 15.0
+}]
 
 [sub_resource type="Animation" id="Animation_p7ar1"]
 length = 0.001
@@ -2032,12 +2294,12 @@ frame = 13
 frame_progress = 1.0
 
 [node name="mystic" type="AnimatedSprite2D" parent="Control/player_effects"]
-self_modulate = Color(100, 100, 100, 1)
-position = Vector2(160.25, 1209.25)
-scale = Vector2(2.40234, 2.40234)
+self_modulate = Color(100, 100, 66.429, 1)
+position = Vector2(165.297, 1180.2)
+scale = Vector2(6.94596, 6.94596)
 sprite_frames = SubResource("SpriteFrames_7abjt")
 animation = &"mystic"
-frame = 12
+frame = 15
 frame_progress = 1.0
 
 [node name="battle_gauge" type="Sprite2D" parent="Control"]
@@ -2097,6 +2359,18 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_sjjby")
 }
+
+[node name="enemy_effects" type="AnimatedSprite2D" parent="Control/enemy"]
+visible = false
+modulate = Color(1, 1, 1, 0.621)
+self_modulate = Color(100, 0, 0, 1)
+position = Vector2(32.1717, 1.86503)
+rotation = -1.5708
+scale = Vector2(0.59681, 0.6961)
+sprite_frames = SubResource("SpriteFrames_i41is")
+animation = &"attack_down"
+frame = 56
+frame_progress = 0.0744364
 
 [node name="enemy_status_effect" parent="Control" instance=ExtResource("88_x01e0")]
 layout_mode = 1
