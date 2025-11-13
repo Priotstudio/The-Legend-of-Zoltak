@@ -43,6 +43,8 @@ var player_heal_status : Dictionary = {"active" : false, 'icon_on' : false, 'tur
 'texture' : 'res://Scene/battle/img/status_icon/heal.png', 'percentage' : 5.0, 'value' : 0}
 var attack_down_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
 'texture' : 'res://Scene/battle/img/status_icon/attack_down.png', 'percentage' : 5.0}
+var def_breaker_status : Dictionary = {"active" : false, 'icon_on' : false, 'turn' : 0, 'duration' : 4, 
+'texture' : 'res://Scene/battle/img/status_icon/def_breaker.png', 'percentage' : 5.0}
 
 
 var paralized : bool = false
@@ -135,11 +137,13 @@ func take_damage (damage : int) -> void:
 func _on_hitbox_area_entered(_area: Area2D) -> void:
 	if battle_scene.player_critical_hit == true:
 		GlobalGameSystem.hit_stop(0.05, 0.15) #perform hitstop
+		Input.vibrate_handheld(50) # VIBRATE DEVICE 
 		battle_scene.player_critical_hit = false
 		$criti.play("show")
 		
 	#GlobalGameSystem.hit_stop(0.05, 0.2) #perform hitstop
 	camera.shake() # shake screen
+	Input.vibrate_handheld(140) # VIBRATE DEVICE 
 	$AnimationPlayer.play("hit")
 	$"../enemy_dmg hit".text = str (enemy_damage)
 	$emeny_dmg.play("dmg")
@@ -399,7 +403,6 @@ func status_effect () -> void:
 		
 	## ATTACK DOWN
 	if attack_down_status.active:
-		var current_atk = atk
 		text = "[center]" + enemy_name + "[color=red] ATTACK [/color]prowess is waning![/center]"
 		attack_down_status.turn += 1
 		if attack_down_status.turn >= attack_down_status.duration:
@@ -422,8 +425,10 @@ func status_effect () -> void:
 				check_if_you_dead()
 			else:
 				check_if_status_icon_is_available(attack_down_status.texture)
-				enemy_effects.play("attack_down")
-				current_status_animation = 'attack_down'
+				modulate_enemy_effects(100,0,0)
+				enemy_effects.play("show")
+				enemy_effects.visible = true
+				current_status_animation = 'show'
 				status_animation = true
 				attack_down_status.icon_on = true
 				battle_scene.announcer_text(text)
@@ -432,7 +437,43 @@ func status_effect () -> void:
 				check_if_you_dead()
 		await get_tree().create_timer(2.5).timeout
 	
-
+	## DEFENCE BREAKER
+	if def_breaker_status.active:
+		text = "[center]" + enemy_name + "[color=blue] DEFENCE [/color]has been breached![/center]"
+		def_breaker_status.turn += 1
+		if def_breaker_status.turn >= def_breaker_status.duration:
+			def_breaker_status.active = false
+			def_breaker_status.icon_on = false
+			def_breaker_status.turn = 0
+			clear_status_icon("def_breaker.png")
+			modulate = "white"
+			def = current_def
+			enemy_effects.visible = false
+			enemy_effects.stop()
+			status_animation = false
+			print (def)
+			
+		
+		else:
+			if def_breaker_status.icon_on == true:
+				# reduce enemy defence 
+				var dmg = (def_breaker_status.percentage / 25.0) * atk
+				print ('dmg: ', dmg)
+				deal_status_dmg(dmg, 'def_breaker')
+				check_if_you_dead()
+			else:
+				check_if_status_icon_is_available(def_breaker_status.texture)
+				modulate_enemy_effects(0,0,100)
+				enemy_effects.play("show")
+				enemy_effects.visible = true
+				current_status_animation = 'show'
+				status_animation = true
+				def_breaker_status.icon_on = true
+				battle_scene.announcer_text(text)
+				var dmg = (def_breaker_status.percentage / 25.0) * def
+				deal_status_dmg(dmg, "def_breaker")
+				check_if_you_dead()
+		await get_tree().create_timer(2.5).timeout
 
 
 
@@ -561,7 +602,16 @@ func deal_status_dmg (dmg, effect : String) -> void :
 		$"../enemy_dmg hit".text = str (dmg)
 		$emeny_dmg.play("dmg")
 		atk -= dmg
-		print(atk)
+
+	elif effect == 'def_breaker':
+		dmg = int (dmg)
+		modulate = 'blue'
+		$AnimationPlayer.play("hit")
+		await get_tree().create_timer(0.4).timeout
+		$"../enemy_dmg hit".text = str (dmg)
+		$emeny_dmg.play("dmg")
+		def -= dmg
+		print(def)
 
 
 func check_if_you_dead () -> void:
@@ -570,3 +620,9 @@ func check_if_you_dead () -> void:
 		## Switch scene to game over menu
 		return
 	pass
+
+
+func modulate_enemy_effects (r : int, g : int, b : int):
+	enemy_effects.self_modulate.r = r
+	enemy_effects.self_modulate.g = g
+	enemy_effects.self_modulate.b = b

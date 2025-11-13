@@ -96,6 +96,8 @@ func load_player_save_file () -> void:
 				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			else:
+				action_container.clear_action_slots()
+				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			
 		# for defenders
@@ -109,6 +111,8 @@ func load_player_save_file () -> void:
 				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			else:
+				action_container.clear_action_slots()
+				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 	
 		# for mages
@@ -122,6 +126,8 @@ func load_player_save_file () -> void:
 				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			else:
+				action_container.clear_action_slots()
+				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			
 		# for summoners
@@ -135,6 +141,8 @@ func load_player_save_file () -> void:
 				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			else:
+				action_container.clear_action_slots()
+				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			
 		# for rangers
@@ -148,6 +156,8 @@ func load_player_save_file () -> void:
 				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			else:
+				action_container.clear_action_slots()
+				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			
 		# for rouges
@@ -156,11 +166,13 @@ func load_player_save_file () -> void:
 			data2 = load ("res://Scene/00_default_class_item_load/rogue/actions/execution.tres")
 			data3 = load ("res://Scene/00_default_class_item_load/rogue/actions/hex_strike.tres")
 			data4 = load ("res://Scene/00_default_class_item_load/rogue/actions/poison_venin.tres")
-			data4 = load ("res://Scene/00_default_class_item_load/rogue/actions/quick_slash.tres")
+			data5 = load ("res://Scene/00_default_class_item_load/rogue/actions/quick_slash.tres")
 			if action_container.data.actions.size() == 0:
 				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 			else:
+				action_container.clear_action_slots()
+				action_container.data.add_default_action(data1,data2,data3,data4,data5)
 				action_container.update_slots()
 				
 	# Load journals if you have

@@ -12,6 +12,7 @@ func add_items (data : Action) -> void:
 
 func add_default_action (data1: Action, data2: Action, data3: Action, data4: Action, data5: Action) -> void:
 	 # Step 1: grow the array by 5 slots
+	actions.resize(0)
 	var old_size := actions.size()
 	actions.resize(old_size + 5)
 	

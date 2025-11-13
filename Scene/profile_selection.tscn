@@ -720,7 +720,6 @@ offset_left = -105.0
 offset_top = 143.333
 offset_right = 85.0
 offset_bottom = 192.333
-scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("8_dim4k")
 texture_pressed = ExtResource("9_3sbq2")
 
@@ -742,7 +741,6 @@ offset_left = -280.833
 offset_top = 137.5
 offset_right = -90.8333
 offset_bottom = 186.5
-scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("8_dim4k")
 texture_pressed = ExtResource("9_3sbq2")
 
@@ -765,7 +763,6 @@ offset_left = 95.0001
 offset_top = 138.333
 offset_right = 285.0
 offset_bottom = 187.333
-scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("8_dim4k")
 texture_pressed = ExtResource("9_3sbq2")
 

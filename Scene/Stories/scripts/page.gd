@@ -578,6 +578,7 @@ func give_reward_or_loss():
 		current_hp -= current_choice["outcome_2"]["loss"]["hp"]
 		GlobalGameSystem.player_hp = current_hp
 		$"../Camera2D".shake(5.0, 5.0)
+		Input.vibrate_handheld(1000) # VIBRATE DEVICE 
 		
 		# check if the calculation is less the 0 if so set it back to 0
 		if current_coin < 0:

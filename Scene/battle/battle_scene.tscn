@@ -1331,7 +1331,7 @@ animations = [{
 "texture": ExtResource("137_4vph6")
 }],
 "loop": true,
-"name": &"attack_down",
+"name": &"show",
 "speed": 15.0
 }]
 
@@ -2363,14 +2363,13 @@ libraries = {
 [node name="enemy_effects" type="AnimatedSprite2D" parent="Control/enemy"]
 visible = false
 modulate = Color(1, 1, 1, 0.621)
-self_modulate = Color(100, 0, 0, 1)
 position = Vector2(32.1717, 1.86503)
 rotation = -1.5708
 scale = Vector2(0.59681, 0.6961)
 sprite_frames = SubResource("SpriteFrames_i41is")
-animation = &"attack_down"
-frame = 56
-frame_progress = 0.0744364
+animation = &"show"
+frame = 55
+frame_progress = 0.934521
 
 [node name="enemy_status_effect" parent="Control" instance=ExtResource("88_x01e0")]
 layout_mode = 1

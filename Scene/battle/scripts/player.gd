@@ -318,6 +318,13 @@ func perform_action (value, action : Action) -> void:
 		
 		
 	elif action.action_type == "Def Breaker":
+		self.play("attack")
+		$hit_box_hit.play("hit")
+		value = max(0, value - enemy.def) # deduct damage from enemy def
+		SignalManager.enemy_damaged.emit(value)
+		var roll = randi_range(1,100)
+		if roll <= status_chance:
+			enemy.def_breaker_status.active = true
 		pass
 		
 	elif action.action_type == "Psychic":

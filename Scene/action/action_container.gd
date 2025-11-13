@@ -33,6 +33,7 @@ func clear_action_slots () -> void:
 		if chid != padding:
 			chid.queue_free()
 			
+			
 func add_action_to_slot () -> void:
 	var added_data = load("res://Scene/00_default_class_item_load/warrior/actions/slash.tres")
 	data.add_items(added_data)
